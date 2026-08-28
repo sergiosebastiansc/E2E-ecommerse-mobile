@@ -21,7 +21,9 @@ jobs:
           java-version: '17'     
 
       - name: Instalar Maestro CLI
-        run: curl -fsSL "https://get.maestro.mobile.dev" | bash
+        run: 
+          curl -fsSL "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
       
       - name: Enable KVM group permissions
         run: |
