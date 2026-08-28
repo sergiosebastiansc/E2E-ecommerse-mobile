@@ -8,7 +8,7 @@ on:
 
 jobs:
   maestro-run:
-    runs-on: macos-13
+    runs-on: ubuntu-latest
 
     steps:
       - name: Carga el codigo
@@ -22,6 +22,15 @@ jobs:
 
       - name: Instalar Maestro CLI
         run: curl -fsSL "https://get.maestro.mobile.dev" | bash
+      
+      - name: Enable KVM group permissions
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0660"' | sudo tee /etc/udev/rules.d/99-kvm.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          sudo apt-get update && sudo apt-get install -y acl
+          sudo setfacl -m u:"$USER":rwx /dev/kvm
+          ls -l /dev/kvm
 
       - name: Correr emulador de android + Tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -29,6 +38,8 @@ jobs:
           api-level: 33
           target: google_apis
           arch: x86_64
+          force-avd-creation: false
+          disable-linux-hw-accel: false
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
