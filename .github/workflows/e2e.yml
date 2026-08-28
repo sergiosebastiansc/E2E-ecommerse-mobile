@@ -52,8 +52,13 @@ jobs:
             maestro test --format junit --output junit-report.xml test/
 
       - name: Subir reporte de pruebas (Artifact)
-        if: always() 
+        if: always()
+        run: |
+          npm install -g junit-viewer
+          junit-viewer --results junit-report.xml --output maestro-report.html
+      - name: Subir reporte HTML (Artifact)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: maestro-junit-report
-          path: junit-report.xml
+          name: maestro-html-report
+          path: maestro-report.html
