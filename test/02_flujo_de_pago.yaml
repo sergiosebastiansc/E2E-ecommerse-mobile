@@ -16,3 +16,6 @@ appId: ${APP_ID}
 - tapOn: "OK"
 - tapOn: "Carrito.*"
 - assertVisible: "Mi Carrito"
+- assertVisible:
+    id: "total_price_text"
+

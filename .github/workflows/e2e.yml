@@ -49,3 +49,11 @@ jobs:
             adb wait-for-device
             adb install apps/ECommerce.apk
             maestro test test/
+            maestro test --format junit --output junit-report.xml test/
+
+      - name: Subir reporte de pruebas (Artifact)
+        if: always() 
+        uses: actions/upload-artifact@v4
+        with:
+          name: maestro-junit-report
+          path: junit-report.xml

@@ -3,9 +3,13 @@ appId: ${APP_ID}
 - launchApp
 - assertVisible: 
     text: "Bienvenido"
-- tapOn: "Usuario"
+- tapOn:
+    id: "username_input"
+
 - inputText: ${USERNAME}
-- tapOn: "Contraseña"
+- tapOn:
+    id: "password_input"
+
 - inputText: ${PASSWORD}
 - tapOn: "Iniciar Sesión"
 - assertVisible: 
