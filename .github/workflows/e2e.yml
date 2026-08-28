@@ -28,7 +28,7 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0660", OPTIONS+="static_node=kvm"' | sudo tee /lib/udev/rules.d/99-kvm.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
-          sudo gpasswd -a $USER kvm
+          ls -l /dev/kvm
 
       - name: Correr emulador de android + Tests
         uses: reactivecircus/android-emulator-runner@v2
