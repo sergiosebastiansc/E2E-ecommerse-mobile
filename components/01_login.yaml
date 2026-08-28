@@ -1,0 +1,16 @@
+appId: ${APP_ID}
+---
+- launchApp
+- assertVisible: 
+    text: "Bienvenido"
+- tapOn: "Usuario"
+- inputText: ${USERNAME}
+- tapOn: "Contraseña"
+- inputText: ${PASSWORD}
+- tapOn: "Iniciar Sesión"
+- assertVisible: 
+    text: "Catálogo"
+
+
+
+

@@ -1,0 +1,18 @@
+appId: ${APP_ID}
+---
+- runFlow: 
+    file: "../components/01_login.yaml"
+    env:
+        APP_ID: "com.ecommerce"
+        USERNAME: "testuser"
+        PASSWORD: "password123"
+- tapOn: "Buscar producto..."
+- inputText: "smartphone"
+- doubleTapOn:
+    text: "Smartphone X"
+- tapOn: "Añadir al Carrito"
+- assertVisible: 
+    text: "Éxito"
+- tapOn: "OK"
+- tapOn: "Carrito.*"
+- assertVisible: "Mi Carrito"

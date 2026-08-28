@@ -1,0 +1,35 @@
+name: maestro-tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  maestro-run:
+    runs-on: macos-latest
+
+    steps:
+      - name: Carga el codigo
+        uses: actions/checkout@v4
+
+      - name: Prepara setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'  
+          java-version: '25'     
+
+      - name: Instalar Maestro CLI
+        run: curl -fsSL "https://get.maestro.mobile.dev" | bash
+
+      - name: Correr emulador de android + Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          script: |
+            export PATH=$PATH:$HOME/.maestro/bin
+            adb install apps/ECommerce.apk
+            maestro test test/
