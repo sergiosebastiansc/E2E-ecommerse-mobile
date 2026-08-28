@@ -51,11 +51,12 @@ jobs:
             maestro test test/
             maestro test --format junit --output junit-report.xml test/
 
-      - name: Subir reporte de pruebas (Artifact)
+      - name: Generar reporte HTML
         if: always()
         run: |
-          npm install -g junit-viewer
-          junit-viewer --results junit-report.xml --output maestro-report.html
+          npx --yes junit-viewer --results junit-report.xml --output maestro-report.html
+          ls -la maestro-report.html
+
       - name: Subir reporte HTML (Artifact)
         if: always()
         uses: actions/upload-artifact@v4
