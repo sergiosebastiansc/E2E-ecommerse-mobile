@@ -54,7 +54,7 @@ jobs:
       - name: Generar reporte HTML
         if: always()
         run: |
-          npx --yes junit-viewer --results junit-report.xml --output maestro-report.html
+          npx --yes junit-viewer --results junit-report.xml > maestro-report.html
           ls -la maestro-report.html
 
       - name: Subir reporte HTML (Artifact)

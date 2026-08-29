@@ -13,8 +13,11 @@ appId: ${APP_ID}
 - tapOn: "Añadir al Carrito"
 - assertVisible: 
     text: "Éxito"
-- tapOn: "OK"
-- tapOn: "Carrito.*"
+- tapOn:
+    id: "button1"
+- tapOn:
+    id: "cart_button"
+
 - assertVisible: "Mi Carrito"
 - assertVisible:
     id: "total_price_text"
